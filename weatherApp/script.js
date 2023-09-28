@@ -12,17 +12,32 @@ const API_KEY = '5a29b1de7b5ce249bd2c3148a1e36683';
 
 async function checkWeather(city) {
   const response = await fetch(`${API_URL}${city}&appid=${API_KEY}`);
-  var data = await response.json();
 
-  console.log(data);
+  if (response.status == 404) {
+    document.querySelector('.error').style.display = 'block';
+    document.querySelector('.weather').style.display = 'none';
+  }
+
+  var data = await response.json();
 
   cityEl.innerHTML = data.name;
   tempEl.innerHTML = `${Math.round(data.main.temp)}°C`;
   humidityEl.innerHTML = `${data.main.humidity}%`;
   windEl.innerHTML = `${Math.round(data.wind.speed)} km/h`;
   weatherIcon.src = `images/${data.weather[0].main.toLowerCase()}.png`;
+
+  document.querySelector('.weather').style.display = 'block';
+  document.querySelector('.error').style.display = 'none';
 }
 
 searchBtn.addEventListener('click', () => {
   checkWeather(searchBox.value);
+  searchBox.value = '';
+});
+
+searchBox.addEventListener('keydown', (e) => {
+  if (e.keyCode == 13) {
+    checkWeather(searchBox.value);
+    searchBox.value = '';
+  }
 });
