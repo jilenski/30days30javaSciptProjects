@@ -14,7 +14,8 @@ async function checkWeather(city) {
   const response = await fetch(`${API_URL}${city}&appid=${API_KEY}`);
 
   if (response.status == 404) {
-    document.querySelector('.error').style.display = 'block';
+    searchBox.classList.add('error');
+    searchBox.placeholder = '*Invalid city name! Try again*';
     document.querySelector('.weather').style.display = 'none';
   }
 
@@ -26,8 +27,9 @@ async function checkWeather(city) {
   windEl.innerHTML = `${Math.round(data.wind.speed)} km/h`;
   weatherIcon.src = `images/${data.weather[0].main.toLowerCase()}.png`;
 
+  searchBox.classList.remove('error');
+  searchBox.placeholder = 'enter city name';
   document.querySelector('.weather').style.display = 'block';
-  document.querySelector('.error').style.display = 'none';
 }
 
 searchBtn.addEventListener('click', () => {
