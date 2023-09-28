@@ -8,7 +8,7 @@ const weatherIcon = document.querySelector('.weather-icon');
 
 const API_URL =
   'https://api.openweathermap.org/data/2.5/weather?units=metric&q=';
-const API_KEY = '5a29b1de7b5ce249bd2c3148a1e36683';
+const API_KEY = config.API_KEY;
 
 async function checkWeather(city) {
   const response = await fetch(`${API_URL}${city}&appid=${API_KEY}`);
