@@ -1,10 +1,20 @@
 const inputBox = document.getElementById('input-box');
 const listContainer = document.getElementById('list-container');
 
+inputBox.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    addTask();
+  }
+});
+
 function addTask() {
   if (inputBox.value === '') {
-    alert('You must write something!');
+    inputBox.classList.add('error');
+    inputBox.placeholder = '*You must write something!*';
   } else {
+    inputBox.classList.remove('error');
+    inputBox.placeholder = 'Add your task';
+
     let liEl = document.createElement('li');
     liEl.innerHTML = inputBox.value;
     listContainer.appendChild(liEl);
@@ -13,6 +23,7 @@ function addTask() {
     spanEl.innerHTML = '\u00d7';
     liEl.appendChild(spanEl);
   }
+
   inputBox.value = '';
   saveData();
 }

@@ -53,6 +53,10 @@ input {
   padding: 10px;
 }
 
+input.error::placeholder {
+  color: red;
+}
+
 button {
   border: none;
   border-radius: 40px;
