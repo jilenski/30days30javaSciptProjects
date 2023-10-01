@@ -92,7 +92,7 @@ nextBtn.addEventListener('click', () => {
   nextBtn.style.display = 'none';
 
   if (currentQuestionIdx >= questions.length) {
-    resetQuiz();
+    restartQuiz();
     return;
   }
 
