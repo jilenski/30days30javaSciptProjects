@@ -83,6 +83,7 @@ function selectAnswer(e) {
 
   if (isCorrect) {
     selectedBtn.classList.add('correct');
+    score++;
   } else {
     selectedBtn.classList.add('incorrect');
   }
@@ -95,5 +96,29 @@ function selectAnswer(e) {
   });
   nextBtn.style.display = 'block';
 }
+
+function showScore() {
+  resetState();
+  questionEl.innerHTML = `You scored ${score} out of ${questions.length}`;
+  nextBtn.innerHTML = 'Play Again';
+  nextBtn.style.display = 'block';
+}
+
+function handleNextBtn() {
+  currentQuestionIdx++;
+  if (currentQuestionIdx < questions.length) {
+    showQuestion();
+  } else {
+    showScore();
+  }
+}
+
+nextBtn.addEventListener('click', () => {
+  if (currentQuestionIdx < questions.length) {
+    handleNextBtn();
+  } else {
+    startQuiz();
+  }
+});
 
 startQuiz();
