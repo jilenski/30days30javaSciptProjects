@@ -1,6 +1,6 @@
 const notesContainer = document.querySelector('.notes-container');
 const createBtn = document.querySelector('.btn');
-const notes = document.querySelectorAll('.input-box');
+let notes = document.querySelectorAll('.input-box');
 
 function showNotes() {
   notesContainer.innerHTML = localStorage.getItem('notes');
@@ -26,7 +26,7 @@ notesContainer.addEventListener('click', function (e) {
     e.target.parentElement.remove();
     updateStorage();
   } else if (e.target.tagName === 'P') {
-    notes = document.querySelector('.input-box');
+    notes = document.querySelectorAll('.input-box');
     notes.forEach((nt) => {
       nt.onkeyup = function () {
         updateStorage();
@@ -34,3 +34,10 @@ notesContainer.addEventListener('click', function (e) {
     });
   }
 });
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Enter') {
+    document.execCommand('insertLineBreak')
+    event.preventDefault()
+  }
+})
