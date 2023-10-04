@@ -1,8 +1,10 @@
 const calculateBtn = document.getElementById('calc-btn');
 const text = document.getElementById('text');
+let dateInput = document.getElementById('birthdate');
+dateInput.max = new Date().toISOString().split('T')[0];
 
 function calculateAge() {
-  const birthDate = document.getElementById('birthdate').value;
+  const birthDate = dateInput.value;
   const currentDate = new Date();
   const inputDate = new Date(birthDate);
 
