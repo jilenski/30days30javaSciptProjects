@@ -11,8 +11,8 @@ body {
   background: linear-gradient(135deg, #4b20b8, #718bcd);
   width: 100%;
   height: 100vh;
-  padding-top: 150px;
-  padding-left: 150px;
+  padding-top: 10%;
+  padding-left: 10%;
 }
 
 h1 {
@@ -44,6 +44,7 @@ input {
   margin-right: 20px;
   padding: 15px;
   flex: 1;
+  cursor: pointer;
 }
 
 button {
@@ -51,6 +52,7 @@ button {
   border: none;
   border-radius: 5px;
   padding: 15px 30px;
+  cursor: pointer;
 }
 
 p {
