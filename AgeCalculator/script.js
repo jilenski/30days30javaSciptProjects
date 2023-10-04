@@ -1,36 +1,31 @@
-const birthDate = document.getElementById('birthdate');
 const calculateBtn = document.getElementById('calc-btn');
 const text = document.getElementById('text');
 
-birthDate.value = '1900-01-01';
-
 function calculateAge() {
-  let currentDate = new Date();
-  let inputDate = new Date(birthDate.value);
+  const birthDate = document.getElementById('birthdate').value;
+  const currentDate = new Date();
+  const inputDate = new Date(birthDate);
 
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentDay = currentDate.getDate();
+  years = currentDate.getFullYear() - inputDate.getFullYear();
+  months = currentDate.getMonth() - inputDate.getMonth();
+  days = currentDate.getDate() - inputDate.getDate();
 
-  const inputYear = inputDate.getFullYear();
-  const inputMonth = inputDate.getMonth() + 1;
-  const inputDay = inputDate.getDate();
-
-  if (inputMonth > currentMonth && inputDay > currentDay) {
-    calcYear = currentYear - 1 - inputYear;
-    calcMonth = currentMonth + 11 - inputMonth;
-    calcDay = currentDay + 30 - inputDay;
-  } else if (inputMonth > currentMonth) {
-    calcYear = currentYear - 1 - inputYear;
-    calcMonth = currentMonth + 12 - inputMonth;
-    calcDay = currentDay - inputDay;
-  } else {
-    calcYear = currentYear - inputYear;
-    calcMonth = currentMonth - inputMonth;
-    calcDay = currentDay - inputDay;
+  if (months < 0) {
+    years--;
+    months += 12;
   }
 
-  text.innerHTML = `You are <span>${calcYear}</span> years, <span>${calcMonth}</span> months and <span>${calcDay}</span> days old`;
+  if (days < 0) {
+    months--;
+    const lastMonth = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - 1,
+      0
+    );
+    days += lastMonth.getDate();
+  }
+
+  text.innerHTML = `You are <span>${years}</span> years, <span>${months}</span> months and <span>${days}</span> days old`;
 }
 
 calculateBtn.addEventListener('click', calculateAge);
